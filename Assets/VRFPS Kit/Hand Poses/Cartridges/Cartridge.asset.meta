@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7c1288a9f499fa5488542ee6190a39d8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 270649
+  packageName: VR FPS Kit
+  packageVersion: 11.3.0
+  assetPath: Assets/VRFPS Kit/Hand Poses/Cartridges/Cartridge.asset
+  uploadId: 811994
