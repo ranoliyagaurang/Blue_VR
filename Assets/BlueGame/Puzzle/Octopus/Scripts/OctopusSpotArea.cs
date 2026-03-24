@@ -2,13 +2,6 @@ using UnityEngine;
 
 public class OctopusSpotArea : MonoBehaviour
 {
-    #region Variables
-
-    [SerializeField] private Vector3 playerPos;
-    [SerializeField] private Transform player;
-
-    #endregion
-
     #region Unity_Callback
 
     private void OnTriggerEnter(Collider other)

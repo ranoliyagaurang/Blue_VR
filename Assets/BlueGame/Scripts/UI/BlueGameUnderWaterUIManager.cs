@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +6,10 @@ using UnityEngine.UI;
 public class BlueGameUnderWaterUIManager : MonoBehaviour
 {
     #region Variables
+
     public static BlueGameUnderWaterUIManager Instance { get; private set; }
+
+    [SerializeField] private Swimmer swimmer;
 
     [Header("Camera")]
     [SerializeField] private GameObject uiCamera;
@@ -48,6 +50,16 @@ public class BlueGameUnderWaterUIManager : MonoBehaviour
     {
         Instance = this;
         blackScreen.DOFade(0, 1f);
+    }
+
+    private void Start()
+    {
+        PlayerController.Instance.playerHealth.DeathEvent += OnPlayerDead;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerController.Instance.playerHealth.DeathEvent -= OnPlayerDead;
     }
 
     #endregion
@@ -148,10 +160,10 @@ public class BlueGameUnderWaterUIManager : MonoBehaviour
 
     #region Puzzle_UI_Control
 
-    public void OnPlayerDead()
+    private void OnPlayerDead()
     {
         missionFailedScreen.gameObject.SetActive(true);
-        //blueGameShootingScreen.OnPlayerDead();
+        uiCamera.SetActive(true);
     }
 
     public void OnSettingOpen()
@@ -181,6 +193,7 @@ public class BlueGameUnderWaterUIManager : MonoBehaviour
     private void SetPlayerOctopusTrapPos()
     {
         playerTransform.position = octopusTrapPos;
+        swimmer.IsOctopusActivate(true);
     }
 
     private void OnOctopusSpot()

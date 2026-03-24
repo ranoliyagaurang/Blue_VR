@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,14 +8,17 @@ public class OctopusHealthController : MonoBehaviour
     #region Variables
 
     [SerializeField] private Image healthBar;
+    [SerializeField] private GameObject healthBarCanvas;
     [SerializeField] private Animator _animator;
 
     private float currentHelth = 1;
-    private readonly float octopusDamage = 0.03f;
-    private readonly float fillSpeed = 4f;
+    private readonly float octopusDamage = 0.05f;
 
     [SerializeField] private BoxCollider leftSideCol;
     [SerializeField] private BoxCollider rightSideCol;
+
+    [SerializeField] private Swimmer swimmer;
+    [SerializeField] private AudioSource octopusSound;
 
     #endregion
 
@@ -23,46 +27,29 @@ public class OctopusHealthController : MonoBehaviour
     public void OnOctopusAttack()
     {
         _animator.SetBool("Attack", true);
+        healthBarCanvas.SetActive(true);
+        octopusSound.Play();
     }
 
     public void TakeDamage()
     {
-        currentHelth -= octopusDamage;
-
-        if (currentHelth <= 0)
+        if (_animator.GetBool("Attack"))
         {
-            if (_animator.GetBool("Attack"))
+            currentHelth -= octopusDamage;
+
+            if (currentHelth <= 0)
             {
+                octopusSound.Stop();
+                healthBarCanvas.SetActive(false);
                 _animator.SetBool("Attack", false);
                 Debug.Log("Octopus Die");
                 UnderWaterGamePlayManager.Instance.octopusSpotArea.SetActive(false);
                 leftSideCol.enabled = false;
                 rightSideCol.enabled = false;
+                swimmer.IsOctopusActivate(false);
             }
+            healthBar.DOFillAmount(currentHelth, 0.1f);
         }
-
-        SetFillAmount(currentHelth);
-    }
-
-    public void SetFillAmount(float targetFill)
-    {
-        StopAllCoroutines();
-        StartCoroutine(ChangeFill(targetFill));
-    }
-
-    private IEnumerator ChangeFill(float targetFill)
-    {
-        float startFill = healthBar.fillAmount;
-        float time = 0f;
-
-        while (Mathf.Abs(healthBar.fillAmount - targetFill) > 0.001f)
-        {
-            time += Time.deltaTime * fillSpeed;
-            healthBar.fillAmount = Mathf.Lerp(startFill, targetFill, time);
-            yield return null;
-        }
-
-        healthBar.fillAmount = targetFill;
     }
 
     #endregion

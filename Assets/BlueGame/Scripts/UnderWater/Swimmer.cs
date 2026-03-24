@@ -15,6 +15,8 @@ public class Swimmer : MonoBehaviour
     [SerializeField] InputActionReference leftControllerSwimReference;
     [SerializeField] InputActionReference rightControllerSwimReference;
 
+
+    private bool isOctopusActive = false;
     private bool isDead = false;
     Rigidbody _rigidbody;
     float _cooldownTimer;
@@ -50,9 +52,17 @@ public class Swimmer : MonoBehaviour
         return Vector3.zero;
     }
 
+    public void IsOctopusActivate(bool isActive)
+    {
+        if (isActive)
+            _rigidbody.linearVelocity = Vector3.zero;
+
+        isOctopusActive = isActive;
+    }
+
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isDead || isOctopusActive) return;
 
         _cooldownTimer += Time.fixedDeltaTime;
 

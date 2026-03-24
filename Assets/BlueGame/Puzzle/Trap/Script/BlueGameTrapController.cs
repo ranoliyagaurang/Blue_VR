@@ -44,7 +44,7 @@ public class BlueGameTrapController : MonoBehaviour
             {
                 trapFillbar.fillAmount = 0f;
                 isActiveTrap = false;
-                BlueGameUnderWaterUIManager.Instance.missionFailedScreen.gameObject.SetActive(true);
+                //BlueGameUnderWaterUIManager.Instance.missionFailedScreen.gameObject.SetActive(true);
             }
         }
     }

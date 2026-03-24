@@ -13,6 +13,7 @@ public class OctopusActivator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Name : " + other.name + "  Layer : " + other.gameObject.layer);
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             codeplate.SetActive(true);

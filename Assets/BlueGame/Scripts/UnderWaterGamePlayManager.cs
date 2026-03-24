@@ -10,16 +10,10 @@ public class UnderWaterGamePlayManager : MonoBehaviour
     public static UnderWaterGamePlayManager Instance { get; private set; }
 
     [Space(2)]
-    [Header("LocationMaker")]
-    public DirectionArrow directionArrow;
-    [SerializeField] private Transform PlayerTran;
-
-    [Space(2)]
     [Header("PlayerData")]
-    [SerializeField] private GameObject mainPlayer;
-    [SerializeField] private Canvas playerCanvas;
-    [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform PlayerTran;
     [SerializeField] private AudioSource swimmingSound;
+    public DirectionArrow directionArrow;
 
     [Space(2)]
     [Header("LevelData")]
@@ -104,7 +98,7 @@ public class UnderWaterGamePlayManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetInt("BlueGameCompletedLevel", 7);
+        PlayerPrefs.SetInt("BlueGameCompletedLevel", 2);
         SetLevelData();
     }
 
@@ -336,7 +330,7 @@ public class UnderWaterGamePlayManager : MonoBehaviour
     {
         while(true)
         {
-            fishParticle.position = new Vector3(mainPlayer.transform.position.x, 8, mainPlayer.transform.position.z);
+            fishParticle.position = new Vector3(PlayerTran.position.x, 8, PlayerTran.position.z);
             yield return new WaitForSeconds(0.2f);
         }
     }
@@ -362,6 +356,7 @@ public class UnderWaterGamePlayManager : MonoBehaviour
             yield return RotateToX(keyAnimTranf, targetEuler, 0.5f);
             yield return RotateToX(keyAnimTranf, originalEuler, 0.5f);
         }
+        Debug.Log("ChestPuzzle");
         currentActivity = CurrentActivity.ChestPuzzle;
         BlueGameUnderWaterUIManager.Instance.ShowInstruction("The chest is stuck due to a jammed lock. Solve the gear rotator puzzle to repair the lock and open the chest.");
     }
