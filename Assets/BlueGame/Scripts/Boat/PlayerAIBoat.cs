@@ -2,30 +2,21 @@
 using System.Collections.Generic;
 using BoatAttack;
 using UnityEngine;
-using UnityEngine.UI;
+using VRFPSKit;
 
 public class PlayerAIBoat : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private Image healthFillbar;
-    [SerializeField] private BlueGameSettingScreen missionFailed;
-    [SerializeField] private CameraRotationController rotationController;
-    [SerializeField] private GameObject boatCamera;
-    [SerializeField] private GameObject cutShortCamera;
-    [SerializeField] private Animation cutShortCameraAnim;
+    public Damageable playerHealth;
     [SerializeField] private GameObject akChar;
     [SerializeField] private GameObject treasure;
     [SerializeField] private Transform treasureDoor;
-    [SerializeField] private GameObject shootingUI;
 
     public Engine engine;
 
     public float _throttle;
     public float _steering;
-
-    [SerializeField] private Camera mainCamera;
-    private Vector3 originalCamPos;
 
     [SerializeField] private List<Transform> aiPlayerBoatCheckPoint = new();
     [SerializeField] private float checkpointReachDistance = 3f;
@@ -217,13 +208,8 @@ public class PlayerAIBoat : MonoBehaviour
     {
         beach.SetActive(true);
         bigStone.SetActive(false);
-        rotationController.gameObject.SetActive(false);
         akChar.SetActive(true);
         treasure.SetActive(true);
-        boatCamera.SetActive(false);
-        shootingUI.SetActive(false);
-        cutShortCamera.SetActive(true);
-        cutShortCameraAnim.Play();
         RenderSettings.skybox = null;
         skyMesh.material = skyMaterial;
         envMesh.material = envMaterial;
@@ -255,57 +241,28 @@ public class PlayerAIBoat : MonoBehaviour
 
     public void TakeDamage()
     {
-        healthFillbar.fillAmount -= 0.05f;
+        playerHealth.health -= 5f;
 
-#if UNITY_ANDROID || UNITY_IOS
-        Handheld.Vibrate();
-#endif
-
-        if (mainCamera != null)
+        if (playerHealth.health <= 0)
         {
-            StopAllCoroutines();
-            StartCoroutine(CameraShake(1f, 0.2f));
+            BlueGameUIManager.LevelFailked?.Invoke();
         }
 
-        if (healthFillbar.fillAmount <= 0)
-        {
-            missionFailed.gameObject.SetActive(true);
-        }
-
-        if (healthFillbar.fillAmount > 0.5f && healthFillbar.fillAmount < 0.75f)
+        if (playerHealth.health > 50f && playerHealth.health < 75f)
         {
             health75Particle.Play();
         }
-        if (healthFillbar.fillAmount > 0.25f && healthFillbar.fillAmount < 0.50f)
+        if (playerHealth.health > 25f && playerHealth.health < 50f)
         {
             health75Particle.Stop();
             health50Particle.Play();
         }
-        if (healthFillbar.fillAmount < 0.25f)
+        if (playerHealth.health < 25f)
         {
             health75Particle.Stop();
             health50Particle.Stop();
             health25Particle.Play();
         }
-    }
-
-    private IEnumerator CameraShake(float duration, float magnitude)
-    {
-        originalCamPos = mainCamera.transform.localPosition;
-
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            float offsetX = Random.Range(-1f, 1f) * magnitude;
-            float offsetY = Random.Range(-1f, 1f) * magnitude;
-
-            mainCamera.transform.localPosition = originalCamPos + new Vector3(offsetX, offsetY, 0f);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        mainCamera.transform.localPosition = originalCamPos;
     }
 
     #endregion

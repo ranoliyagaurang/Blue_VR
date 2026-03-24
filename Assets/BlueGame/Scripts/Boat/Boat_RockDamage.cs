@@ -18,6 +18,9 @@ public class Boat_RockDamage : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        if (BlueGameManager.Instance.isBoatRidingCompleted)
+            return;
+
         if (collision.gameObject.CompareTag("Rock"))
         {
             Debug.Log("Collide with obstacle");
