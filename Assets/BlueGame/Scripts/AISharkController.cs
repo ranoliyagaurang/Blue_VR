@@ -100,7 +100,6 @@ public class AISharkController : MonoBehaviour
         {
             if (!_animator.GetBool("Attack"))
                 _animator.SetBool("Attack", true);
-            Debug.Log("Fish Close Animation");
         }
         else
         {
@@ -109,7 +108,6 @@ public class AISharkController : MonoBehaviour
         }
         if (dist <= 2f)
         {
-            Debug.Log("Fish to Much Close");
             isCloseOnece = true;
             if ((!_animator.GetBool("Death")) && isDamage)
             {
@@ -142,7 +140,6 @@ public class AISharkController : MonoBehaviour
                 _animator.SetBool("Death", true);
                 UnderWaterGamePlayManager.Instance.SharkDeath();
                 Invoke(nameof(AfterDeathDestroyFish), 1.5f);
-                Debug.Log("Fish Die");
             }
         }
         healthBar.DOFillAmount(currentHelth, 0.5f);

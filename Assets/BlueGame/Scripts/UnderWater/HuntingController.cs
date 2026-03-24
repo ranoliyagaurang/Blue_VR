@@ -33,7 +33,6 @@ public class HuntingController : MonoBehaviour
 
     public void SpawnFishForHunting(int fc)
     {
-        Debug.Log("Fish Spawn : " + fc);
         fishCount = fc;
         fishSpawnCoroutine = StartCoroutine(SpawnFish());
     }

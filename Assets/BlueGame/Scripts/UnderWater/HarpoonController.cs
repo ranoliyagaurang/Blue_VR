@@ -88,7 +88,6 @@ public class HarpoonController : MonoBehaviour
 
     private void HarpoonGunTriggerActivate(ActivateEventArgs args)
     {
-        Debug.Log("isGrab : " + isGrab + "  Count : " + grabInteractable.interactorsSelecting.Count);
         if (!isGrab) return;
 
         IXRActivateInteractor interactor = args.interactorObject;

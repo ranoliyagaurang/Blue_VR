@@ -98,7 +98,7 @@ public class UnderWaterGamePlayManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetInt("BlueGameCompletedLevel", 2);
+        //PlayerPrefs.SetInt("BlueGameCompletedLevel", 2);
         SetLevelData();
     }
 

@@ -105,21 +105,7 @@ public class BlueGameManager : MonoBehaviour
 
     private void OnBoatFight()
     {
-        GameObject vThirdPersonCamera = GameObject.Find("ThirdPersonCamera");
-        GameObject vInputType = GameObject.Find("vInputType");
-        GameObject MousePositionHandler = GameObject.Find("MousePositionHandler");
-        GameObject objectContainer = GameObject.Find("Object Container");
-
         Destroy(beachObj);
-
-        if (vThirdPersonCamera != null)
-            Destroy(vThirdPersonCamera);
-        if (vInputType != null)
-            Destroy(vInputType);
-        if (MousePositionHandler != null)
-            Destroy(MousePositionHandler);
-        if (objectContainer != null)
-            Destroy(objectContainer);
 
         GameObject go = Instantiate(boatFight);
         playerAIBoat = go.GetComponentInChildren<PlayerAIBoat>();
