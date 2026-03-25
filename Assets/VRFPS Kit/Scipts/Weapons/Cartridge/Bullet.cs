@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace VRFPSKit
@@ -19,13 +16,7 @@ namespace VRFPSKit
         public AudioSource hitSound;
         public GameObject defaultImpactEffect;
 
-        public GameObject rockImpactEffect;
-        public GameObject groundImpactEffect;
-        public GameObject woodImpactEffect;
-        public GameObject metalImpactEffect;
-
-        public GameObject snowGroundImpactEffect;
-        public GameObject snowWoodImpactEffect;
+        public GameObject waterImpactEffect;
 
         public GameObject tracerTail;
         [Space]
@@ -84,13 +75,6 @@ namespace VRFPSKit
             HitEvent?.Invoke(this);
 
             if (collision.gameObject.CompareTag("Enemy"))
-            {
-                EnemyDamage?.Invoke(collision.gameObject);
-                Instantiate(bloodEffect,transform.position,transform.rotation);
-                Destroy(gameObject);
-                return;
-            }
-            else if (collision.gameObject.CompareTag("MachineGunTerrorist"))
             {
                 EnemyDamage?.Invoke(collision.gameObject);
                 Destroy(gameObject);
@@ -152,38 +136,11 @@ namespace VRFPSKit
             
             //GameObject impactEffectObj = Instantiate(impactEffectPrefab, impactPoint, normalQuaternion);
 
-            if (hitObj.CompareTag("Rock"))
-                Instantiate(rockImpactEffect, impactPoint, normalQuaternion);
-            else if(hitObj.CompareTag("Ground"))
-                Instantiate(groundImpactEffect, impactPoint, normalQuaternion);
-            else if (hitObj.CompareTag("Wood"))
-                Instantiate(woodImpactEffect, impactPoint, normalQuaternion);
-            else if (hitObj.CompareTag("Metal"))
-                Instantiate(metalImpactEffect, impactPoint, normalQuaternion);
-
-            if(SceneManager.GetActiveScene().name == "Mission_5")
+            if (hitObj.CompareTag("Water"))
             {
-                if (hitObj.CompareTag("Climbable"))
-                    Instantiate(snowGroundImpactEffect, impactPoint, normalQuaternion);
-                else if (hitObj.CompareTag("Wood"))
-                    Instantiate(snowWoodImpactEffect, impactPoint, normalQuaternion); 
-            }
-            else
-            {
-                if (hitObj.CompareTag("Ground"))
-                    Instantiate(groundImpactEffect, impactPoint, normalQuaternion);
-                else if (hitObj.CompareTag("Wood"))
-                    Instantiate(woodImpactEffect, impactPoint, normalQuaternion);
-            }
-            if (hitObj.CompareTag("Rock"))
-                Instantiate(rockImpactEffect, impactPoint, normalQuaternion);
-            else if (hitObj.CompareTag("Metal"))
-                Instantiate(metalImpactEffect, impactPoint, normalQuaternion);
-
-            if ((SceneManager.GetActiveScene().name == "Mission_1") || (SceneManager.GetActiveScene().name == "Mission_2") || (SceneManager.GetActiveScene().name == "Mission_3")
-                || (SceneManager.GetActiveScene().name == "Medical_Supply") || (SceneManager.GetActiveScene().name == "Mission_4") || (SceneManager.GetActiveScene().name == "Rescue_Soldier")
-                || (SceneManager.GetActiveScene().name == "Arrest_Terrorist") || (SceneManager.GetActiveScene().name == "Mission_5"))
+                Instantiate(waterImpactEffect, impactPoint, normalQuaternion);
                 Destroy(gameObject);
+            }
         }
 
         /// <summary>

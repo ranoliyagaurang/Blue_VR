@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using BoatAttack;
+using DG.Tweening;
 using UnityEngine;
 using VRFPSKit;
 
@@ -12,6 +13,7 @@ public class PlayerAIBoat : MonoBehaviour
     [SerializeField] private GameObject akChar;
     [SerializeField] private GameObject treasure;
     [SerializeField] private Transform treasureDoor;
+    [SerializeField] private PlayerAssignToAIBoat playerAssignToAI;
 
     public Engine engine;
 
@@ -59,13 +61,6 @@ public class PlayerAIBoat : MonoBehaviour
     private void Start()
     {
         BlueGameUIManager.Instance.ShowBoatFightIns(this);
-        SetSensitivity();
-    }
-
-    public void SetSensitivity()
-    {
-        //rotationController.SensitivityX = (BlueGameUIManager.Instance.settingScreen.xSensitivitySlider.value * 3) / 100;
-        //rotationController.SensitivityY = (BlueGameUIManager.Instance.settingScreen.ySensitivitySlider.value * 3) / 100;
     }
 
     void FixedUpdate()
@@ -176,8 +171,11 @@ public class PlayerAIBoat : MonoBehaviour
 
         if(enemyCount > 4)
         {
-            BlueGameUIManager.Instance.ShowLoading(2, 1);
-            Invoke(nameof(CutScene), 1.5f);
+            BlueGameManager.Instance.blackScreen.DOFade(1, 1f).OnComplete(() =>
+            {
+                CutScene();
+                playerAssignToAI.FightComplete();
+            });
             return;
         }
 
@@ -216,11 +214,12 @@ public class PlayerAIBoat : MonoBehaviour
         StartCoroutine(RotateToX(treasureDoor, new Vector3(120, 0, 0), 2));
         Invoke(nameof(ShowIns), 9);
         isBeach = true;
+        BlueGameManager.Instance.blackScreen.DOFade(0, 0.5f);
     }
 
     private void ShowIns()
     {
-        BlueGameUIManager.Instance.ShowInstruction("Congratulations! You’ve defeated all the enemies and claimed the Lady Blue’s Treasure.\r\nYour journey was worth it! Now return to the Beach and go main game to continue your adventure.");
+        BlueGameUIManager.Instance.ShowInstruction("Congratulations! You’ve defeated all the enemies and claimed the Lady Blue’s Treasure.\r\nYour journey was worth it!");
     }
 
     public void IsGameComplete()

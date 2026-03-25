@@ -1,4 +1,5 @@
 using DG.Tweening;
+using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,10 +25,14 @@ public class BlueGameManager : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject leftHandRay;
     [SerializeField] private GameObject rightHandRay;
+    [SerializeField] private GameObject vest;
+    [SerializeField] private XRSpawnWithInteractable xRSpawnWithInteractable;
     public Image blackScreen;
 
 
     private GameObject tmpBoatRideObj;
+
+    private bool pistolDrop;
 
     public bool isBoatRidingCompleted;
 
@@ -41,7 +46,7 @@ public class BlueGameManager : MonoBehaviour
     {
         Instance = this;
 
-        PlayerPrefs.SetInt("BlueGameCompletedLevel", 9);
+        PlayerPrefs.SetInt("BlueGameCompletedLevel", 0);
     }
 
     private void OnEnable()
@@ -56,19 +61,16 @@ public class BlueGameManager : MonoBehaviour
 
     private void Start()
     {
-        switch (PlayerPrefs.GetInt("BlueGameCompletedLevel"))
-        {
-            case 0:
-                //BlueGameUIManager.Instance.startingScreen.Show();
-                BlueGameUIManager.Instance.StartGame();
-                break;
-            case 1:
-                OnBoatRide();
-                break;
-            case 9:
-                OnBoatFight();
-                break;
-        }
+        int level = PlayerPrefs.GetInt("BlueGameCompletedLevel");
+
+        if (level == 0)
+            BlueGameUIManager.Instance.StartGame();
+        else if (level == 1)
+            OnBoatRide();
+        else if (level == 9)
+            OnBoatFight();
+        else
+            SceneManager.LoadSceneAsync("BlueUnderWaterGamePlay");
     }
 
     #endregion
@@ -104,6 +106,8 @@ public class BlueGameManager : MonoBehaviour
     private void OnBoatFight()
     {
         Destroy(beachObj);
+
+        vest.SetActive(true);
 
         GameObject go = Instantiate(boatFight);
         playerAIBoat = go.GetComponentInChildren<PlayerAIBoat>();
@@ -152,22 +156,61 @@ public class BlueGameManager : MonoBehaviour
     public void LeftHandGrab(SelectEnterEventArgs args)
     {
         leftHandRay.SetActive(false);
+
+        if (args.interactableObject.transform.name == "M17 9MM(Clone)")
+            pistolDrop = false;
     }
 
     public void LeftHandGrabRelease(SelectExitEventArgs args)
     {
         leftHandRay.SetActive(true);
+
+        if (args.interactableObject.transform.gameObject.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+        }
+
+        if ((args.interactableObject.transform.name == "M17 9MM(Clone)"))
+        {
+            pistolDrop = true;
+            Invoke(nameof(PistolRepos), 2);
+        }
     }
 
     public void RightHandGrab(SelectEnterEventArgs args)
     {
         rightHandRay.SetActive(false);
+
+        if (args.interactableObject.transform.name == "M17 9MM(Clone)")
+            pistolDrop = false;
     }
 
 
     public void RightHandGrabRelease(SelectExitEventArgs args)
     {
         rightHandRay.SetActive(true);
+
+        if (args.interactableObject.transform.gameObject.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+        }
+
+        if ((args.interactableObject.transform.name == "M17 9MM(Clone)"))
+        {
+            pistolDrop = true;
+            Invoke(nameof(PistolRepos), 2);
+        }
+    }
+
+    private void PistolRepos()
+    {
+        if (pistolDrop)
+        {
+            xRSpawnWithInteractable.ReSetGunPos();
+            pistolDrop = false;
+        }
     }
 
     #endregion

@@ -4978,7 +4978,6 @@ GameObject:
   - component: {fileID: 5420886484202515910}
   - component: {fileID: 6247449549557667805}
   - component: {fileID: 5509161243699628515}
-  - component: {fileID: 1178884806218670421}
   m_Layer: 0
   m_Name: EngineSmoke50
   m_TagString: Untagged
@@ -9880,20 +9879,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1178884806218670421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397221529915457672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d747fa9089f114c8ccc18d4d02ec18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: Infinity
-  MaxDamage: Infinity
 --- !u!1 &545750926746895663
 GameObject:
   m_ObjectHideFlags: 0
@@ -10095,9 +10080,9 @@ GameObject:
   - component: {fileID: 5807581604196171917}
   - component: {fileID: 3053571161788859601}
   - component: {fileID: 7689596519355106560}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: EnemyBoat_1
-  m_TagString: boat
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10147,7 +10132,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!64 &5807581604196171917
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10169,7 +10154,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -6750476621044282790, guid: 6e54adc5d11b04e4193225a569411459, type: 3}
+  m_Mesh: {fileID: 2297425034801156755, guid: 6e54adc5d11b04e4193225a569411459, type: 3}
 --- !u!114 &3053571161788859601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20207,7 +20192,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d8603b41eb2844649b9e02a41d1e1ad2, type: 2}
+  - {fileID: 2100000, guid: 1b1a402574c66f54c98d3022a98982c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30123,7 +30108,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d8603b41eb2844649b9e02a41d1e1ad2, type: 2}
+  - {fileID: 2100000, guid: 1b1a402574c66f54c98d3022a98982c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30250,7 +30235,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a4d40444afed34aed99d4efeead253a0, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: a4d40444afed34aed99d4efeead253a0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
@@ -40829,7 +40814,6 @@ GameObject:
   - component: {fileID: 850164786615330376}
   - component: {fileID: 7942734579258423128}
   - component: {fileID: 2120776714083865644}
-  - component: {fileID: 6844865703302772647}
   m_Layer: 0
   m_Name: EngineSmoke75
   m_TagString: Untagged
@@ -45731,20 +45715,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &6844865703302772647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4920750562775545979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d747fa9089f114c8ccc18d4d02ec18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: Infinity
-  MaxDamage: Infinity
 --- !u!1 &5176593412994733549
 GameObject:
   m_ObjectHideFlags: 0
@@ -55710,8 +55680,6 @@ GameObject:
   - component: {fileID: 8960582920461548071}
   - component: {fileID: 8136334506435430294}
   - component: {fileID: 3654364877303609037}
-  - component: {fileID: 2817868081007566229}
-  - component: {fileID: 947718523320015246}
   m_Layer: 0
   m_Name: EngineFire25
   m_TagString: Untagged
@@ -60604,34 +60572,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &2817868081007566229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6203881468886522274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d747fa9089f114c8ccc18d4d02ec18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: Infinity
-  MaxDamage: Infinity
---- !u!114 &947718523320015246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6203881468886522274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d747fa9089f114c8ccc18d4d02ec18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 100
-  MaxDamage: Infinity
 --- !u!1 &6349358745158429282
 GameObject:
   m_ObjectHideFlags: 0
@@ -66055,7 +65995,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9708c8add467e47dc9f4e77dbf372787, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9708c8add467e47dc9f4e77dbf372787, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.9
@@ -71437,7 +71377,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 23a81faf40912804b936f5f2e5bf8ba8, type: 2}
+  - {fileID: 2100000, guid: d699add3b35fd3c48b46b3fa323c6b3b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71570,12 +71510,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wakes: []
-  wakePrefab:
-    m_AssetGUID: dd07c82db50e943ca8314f2c407ea841
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
   genDistance: 0.5
   maxAge: 5
 --- !u!1 &8305780155125001897

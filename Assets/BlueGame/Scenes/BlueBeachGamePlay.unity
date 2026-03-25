@@ -4632,7 +4632,6 @@ GameObject:
   - component: {fileID: 318394969}
   - component: {fileID: 318394972}
   - component: {fileID: 318394971}
-  - component: {fileID: 318394970}
   m_Layer: 5
   m_Name: MissionFailed
   m_TagString: Untagged
@@ -4662,34 +4661,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &318394970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318394968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 285f0639de770194caa969ec9e10f75a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedColor: {r: 0.07058824, g: 0.48627454, b: 1, a: 1}
-  buttonElementLinks:
-  - button: {fileID: 1891487002}
-    element: {fileID: 1891487000}
-    lineImage: {fileID: 306664033}
-  - button: {fileID: 1023565592}
-    element: {fileID: 1023565590}
-    lineImage: {fileID: 722264021}
-  - button: {fileID: 814316277}
-    element: {fileID: 814316278}
-    lineImage: {fileID: 1756144962}
-  xSensitivityPerTxt: {fileID: 0}
-  ySensitivityPerTxt: {fileID: 0}
-  xSensitivitySlider: {fileID: 0}
-  ySensitivitySlider: {fileID: 0}
-  sensitivityPopUp: {fileID: 0}
 --- !u!114 &318394971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10248,7 +10219,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 318394970}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BlueGameSettingScreen, Assembly-CSharp
         m_MethodName: OnExitBlueGame
         m_Mode: 1
@@ -18264,6 +18235,8 @@ MonoBehaviour:
   playerTransform: {fileID: 1425428752}
   leftHandRay: {fileID: 609835271}
   rightHandRay: {fileID: 1961276068}
+  vest: {fileID: 5295902177743339356}
+  xRSpawnWithInteractable: {fileID: 1260573295461864504}
   blackScreen: {fileID: 243642293}
   isBoatRidingCompleted: 0
   playerAIBoat: {fileID: 0}
@@ -21638,7 +21611,7 @@ RectTransform:
   m_GameObject: {fileID: 1745594902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.099}
-  m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1853823062}
@@ -26851,21 +26824,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 484895440}
-    - target: {fileID: 4738468400104727436, guid: 112330b05ee183042afdf67353447447,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738468400104727436, guid: 112330b05ee183042afdf67353447447,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738468400104727436, guid: 112330b05ee183042afdf67353447447,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5284515282448642698, guid: 112330b05ee183042afdf67353447447,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26916,11 +26874,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6724903898242782384, guid: 112330b05ee183042afdf67353447447,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1425428752}
     - target: {fileID: 8644741039870987091, guid: 112330b05ee183042afdf67353447447,
         type: 3}
       propertyPath: m_Camera
@@ -28006,7 +27959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &5404767809545217182
 MonoBehaviour:
   m_ObjectHideFlags: 0

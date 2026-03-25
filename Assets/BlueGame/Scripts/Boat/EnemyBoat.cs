@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BoatAttack;
 using UnityEngine;
 using UnityEngine.UI;
+using VRFPSKit;
 
 public class EnemyBoat : MonoBehaviour
 {
@@ -37,6 +38,16 @@ public class EnemyBoat : MonoBehaviour
 
     #region Unity_Callback
 
+    private void OnEnable()
+    {
+        Bullet.EnemyDamage += TakeDamage;
+    }
+
+    private void OnDisable()
+    {
+        Bullet.EnemyDamage -= TakeDamage;
+    }
+
     void FixedUpdate()
     {
         if (!startEngin)
@@ -60,15 +71,6 @@ public class EnemyBoat : MonoBehaviour
 
             if (currentIndex >= aiBoatCheckPoint.Count)
                 currentIndex = 0;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            TakeDamage();
-            Destroy(other.gameObject);
         }
     }
 
@@ -101,37 +103,39 @@ public class EnemyBoat : MonoBehaviour
         }
     } 
 
-    public void TakeDamage()
+    public void TakeDamage(GameObject go)
     {
-        Debug.Log("Collide with obstacle");
-        healthFillbar.fillAmount -= 0.1f;
-
-        if (healthFillbar.fillAmount <= 0)
+        if (go == gameObject)
         {
-            if (!_animator.GetBool("Death"))
+            healthFillbar.fillAmount -= 0.1f;
+
+            if (healthFillbar.fillAmount <= 0)
             {
-                startEngin = false;
-                _animator.SetBool("Death", true);
-                Invoke(nameof(AfterSomeTimeDestroyMe), 2);
-                playerBoat.EnemySpawn();
-                sparksParticle.Play();
+                if (!_animator.GetBool("Death"))
+                {
+                    startEngin = false;
+                    _animator.SetBool("Death", true);
+                    Invoke(nameof(AfterSomeTimeDestroyMe), 2);
+                    playerBoat.EnemySpawn();
+                    sparksParticle.Play();
+                }
             }
-        }
 
-        if (healthFillbar.fillAmount > 0.5f && healthFillbar.fillAmount < 0.75f)
-        {
-            health75Particle.Play();
-        }
-        if (healthFillbar.fillAmount > 0.25f && healthFillbar.fillAmount < 0.50f)
-        {
-            health75Particle.Stop();
-            health50Particle.Play();
-        }
-        if (healthFillbar.fillAmount < 0.25f)
-        {
-            health75Particle.Stop();
-            health50Particle.Stop();
-            health25Particle.Play();
+            if (healthFillbar.fillAmount > 0.5f && healthFillbar.fillAmount < 0.75f)
+            {
+                health75Particle.Play();
+            }
+            if (healthFillbar.fillAmount > 0.25f && healthFillbar.fillAmount < 0.50f)
+            {
+                health75Particle.Stop();
+                health50Particle.Play();
+            }
+            if (healthFillbar.fillAmount < 0.25f)
+            {
+                health75Particle.Stop();
+                health50Particle.Stop();
+                health25Particle.Play();
+            }
         }
     }
 

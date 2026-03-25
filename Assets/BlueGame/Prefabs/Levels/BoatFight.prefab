@@ -34979,7 +34979,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 40768
+    m_Bits: 40896
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -35000,7 +35000,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 40768
+    m_Bits: 40896
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -35045,6 +35045,7 @@ MonoBehaviour:
   akChar: {fileID: 1981821636020526159}
   treasure: {fileID: 1957883300612295944}
   treasureDoor: {fileID: 816648479463307215}
+  playerAssignToAI: {fileID: 4824232096316145572}
   engine: {fileID: 8783936732623735909}
   _throttle: 0
   _steering: 0
