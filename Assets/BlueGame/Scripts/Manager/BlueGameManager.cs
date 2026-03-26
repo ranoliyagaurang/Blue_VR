@@ -1,5 +1,4 @@
 using DG.Tweening;
-using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,12 +21,18 @@ public class BlueGameManager : MonoBehaviour
     [SerializeField] private GameObject gravityObj;
     [SerializeField] private GameObject jumpObj;
     [SerializeField] private Transform beachPos;
+
+    [Space(2)]
+    [Header("Player Data")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject leftHandRay;
     [SerializeField] private GameObject rightHandRay;
     [SerializeField] private GameObject vest;
+    [SerializeField] private GameObject leftHandMesh;
+    [SerializeField] private GameObject rightHandMesh;
     [SerializeField] private XRSpawnWithInteractable xRSpawnWithInteractable;
     public Image blackScreen;
+    [Space(2)]
 
 
     private GameObject tmpBoatRideObj;
@@ -46,7 +51,7 @@ public class BlueGameManager : MonoBehaviour
     {
         Instance = this;
 
-        PlayerPrefs.SetInt("BlueGameCompletedLevel", 0);
+        //PlayerPrefs.SetInt("BlueGameCompletedLevel", 1);
     }
 
     private void OnEnable()
@@ -158,7 +163,17 @@ public class BlueGameManager : MonoBehaviour
         leftHandRay.SetActive(false);
 
         if (args.interactableObject.transform.name == "M17 9MM(Clone)")
+        {
             pistolDrop = false;
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().EnablePose("Left");
+            leftHandMesh.SetActive(false);
+        }
+
+        if(args.interactableObject.transform.name == "M17 17rd Magazine(Clone)")
+        {
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().EnablePose("Left");
+            leftHandMesh.SetActive(false);
+        }
     }
 
     public void LeftHandGrabRelease(SelectExitEventArgs args)
@@ -175,6 +190,14 @@ public class BlueGameManager : MonoBehaviour
         {
             pistolDrop = true;
             Invoke(nameof(PistolRepos), 2);
+            leftHandMesh.SetActive(true);
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().DisablePose();
+        }
+
+        if (args.interactableObject.transform.name == "M17 17rd Magazine(Clone)")
+        {
+            leftHandMesh.SetActive(true);
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().DisablePose();
         }
     }
 
@@ -182,8 +205,20 @@ public class BlueGameManager : MonoBehaviour
     {
         rightHandRay.SetActive(false);
 
+        Debug.Log("Name : " + args.interactorObject.transform.name);
+
         if (args.interactableObject.transform.name == "M17 9MM(Clone)")
+        {
             pistolDrop = false;
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().EnablePose("Right");
+            rightHandMesh.SetActive(false);
+        }
+
+        if (args.interactableObject.transform.name == "M17 17rd Magazine(Clone)")
+        {
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().EnablePose("Right");
+            rightHandMesh.SetActive(false);
+        }
     }
 
 
@@ -201,6 +236,14 @@ public class BlueGameManager : MonoBehaviour
         {
             pistolDrop = true;
             Invoke(nameof(PistolRepos), 2);
+            rightHandMesh.SetActive(true);
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().DisablePose();
+        }
+
+        if (args.interactableObject.transform.name == "M17 17rd Magazine(Clone)")
+        {
+            rightHandMesh.SetActive(true);
+            args.interactableObject.transform.gameObject.GetComponent<HandPoseOnGun>().DisablePose();
         }
     }
 

@@ -224,8 +224,8 @@ public class PlayerAIBoat : MonoBehaviour
 
     public void IsGameComplete()
     {
-        BlueGameUIManager.Instance.ShowLoading(3, 1);
-        BlueGameUIManager.Instance.ShowInstruction("You faced the darkness of the ocean… you fought the unseen, you unlocked the treasure, and you survived. But the sea is endless… and what you’ve found is only a fraction of what lies beneath. A far greater journey awaits—more deadly, more thrilling, and more rewarding than ever before.\r\nThis is not the end. It’s only the beginning.\r\nComing Soon… Another Dive. Another Destiny.");
+        BlueGameUIManager.Instance.OnInstructionClick();
+        BlueGameUIManager.Instance.OnCompleteUI();
         Invoke(nameof(GoToMainGame), 1f);
     }
     private void GoToMainGame()

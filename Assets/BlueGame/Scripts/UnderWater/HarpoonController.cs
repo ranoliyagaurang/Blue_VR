@@ -82,7 +82,7 @@ public class HarpoonController : MonoBehaviour
             if (gunReset)
                 ReSetGun();
             else
-                Invoke(nameof(ReSetGun), 3);
+                Invoke(nameof(ReSetGun), 2);
         }
     }
 

@@ -40,7 +40,7 @@ namespace BoatAttack
                 ref _turnVel, 
                 0.5f, 
                 10f,
-                Time.fixedTime);
+                Time.deltaTime);
             transform.localEulerAngles = new Vector3(0f, _currentAngle, 0f);
         }
 	}

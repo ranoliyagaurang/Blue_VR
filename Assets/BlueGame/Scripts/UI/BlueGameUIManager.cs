@@ -14,6 +14,7 @@ public class BlueGameUIManager : MonoBehaviour
     [Header("Game_Instruction")]
     public BlueGameStartingScreen startingScreen;
     [SerializeField] private GameObject instructionPanel;
+    [SerializeField] private GameObject gameCompleteMessage;
     [SerializeField] private TextMeshProUGUI instructionTxt;
     [SerializeField] private BeachLevelController beachController;
     [SerializeField] private MissionFailed missionFailed;
@@ -119,6 +120,21 @@ public class BlueGameUIManager : MonoBehaviour
 
     #region Instruction
 
+    public void OnCompleteUI()
+    {
+        gameCompleteMessage.SetActive(true);
+    }
+
+    public void OnExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        missionFailed.OnNewGameClick();
+    }
+
     public void ShowBoatFightIns(PlayerAIBoat pb)
     {
         isBoatFight = true;
@@ -154,12 +170,4 @@ public class BlueGameUIManager : MonoBehaviour
 
     #endregion
 
-    #region Loading
-
-    public void ShowLoading(float duration, float waitAtFull)
-    {
-        
-    }
-
-    #endregion
 }

@@ -6,10 +6,9 @@ public class OctopusAttackController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             PlayerController.Instance.PlayerTakeDamage(8f);
-            Debug.Log("Player Damage");
         }
     }
 

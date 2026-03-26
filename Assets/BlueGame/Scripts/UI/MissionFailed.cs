@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -29,10 +30,21 @@ public class MissionFailed : MonoBehaviour
             {
                 continue;
             }
-            elementButtonLink.button.onClick.AddListener(() =>
+
+            EventTrigger trigger = elementButtonLink.button.gameObject.GetComponent<EventTrigger>();
+            if (trigger == null)
+            {
+                trigger = elementButtonLink.button.gameObject.AddComponent<EventTrigger>();
+            }
+
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerEnter;
+            entry.callback.AddListener((data) =>
             {
                 ShowElement(elementButtonLink.element);
             });
+
+            trigger.triggers.Add(entry);
         }
 
         ShowElement(buttonElementLinks[0].element);
